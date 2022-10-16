@@ -1,9 +1,6 @@
 # VSCode
 .vscode/
 
-# Git submodule with notes
-src/pages/public-notes
-
 # build output
 dist/
 .output/

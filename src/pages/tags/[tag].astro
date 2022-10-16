@@ -1,0 +1,35 @@
+---
+let posts = await Astro.glob("../../pages/public-notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
+posts = posts.filter((post) => !post.file.includes("README.md"));
+
+export async function getStaticPaths() {
+  let posts = await Astro.glob("../../pages/public-notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
+  const tags = posts
+    .map((p) => p.frontmatter.tags)
+    .filter((tag) => tag)
+    .flat()
+    .map((tag) => tag.trim())
+    .sort()
+    .filter((tag, pos, _array) => !pos || tag != _array[pos - 1]);
+
+  return tags.map((tag) => {
+    return {
+      params: {
+        tag,
+      },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+---
+
+<p>
+  {tag}
+</p>
+
+{
+  posts
+    .filter((post) => post.frontmatter.tags.includes(tag))
+    .map((post) => post.frontmatter.title || post.url)
+}

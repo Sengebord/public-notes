@@ -3,7 +3,6 @@ import * as path from "path";
 import { DateTime } from "luxon";
 
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 
 import PublicNoteLink from "../components/PublicNoteLink.astro";
 
@@ -11,7 +10,8 @@ let posts = await Astro.glob("../pages/public-notes/**/*.md"); // returns an arr
 posts = posts
   .filter((post) => !post.file.includes("README.md"))
   .map((post) => {
-    post.frontmatter.title = post.frontmatter.title || path.basename(post.file);
+    post.frontmatter.title =
+      post.frontmatter.title || path.basename(post.file).slice(0, -3);
     return post;
   })
   .sort((a, b) =>
@@ -49,39 +49,17 @@ const tags = posts
       </div>
       <div class="">
         <div>Latest 10 notes</div>
-        <div>
-          {posts.slice(0, 10).map((post) => <PublicNoteLink post={post} />)}
-        </div>
+        <p>
+          {
+            posts.slice(0, 10).map((post) => (
+              <p>
+                <PublicNoteLink post={post} />
+              </p>
+            ))
+          }
+        </p>
       </div>
     </div>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-    </p>
-    <ul role="list" class="link-card-grid">
-      <Card
-        href="https://docs.astro.build/"
-        title="Documentation"
-        body="Learn how Astro works and explore the official API docs."
-      />
-      <Card
-        href="https://astro.build/integrations/"
-        title="Integrations"
-        body="Supercharge your project with new frameworks and libraries."
-      />
-      <Card
-        href="https://astro.build/themes/"
-        title="Themes"
-        body="Explore a galaxy of community-built starter themes."
-      />
-      <Card
-        href="https://astro.build/chat/"
-        title="Community"
-        body="Come say hi to our amazing Discord community. ❤️"
-      />
-    </ul>
   </main>
 </Layout>
 

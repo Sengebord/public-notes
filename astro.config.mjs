@@ -18,8 +18,7 @@ export default defineConfig({
 function setFallbackLayout() {
   // sets a default layout for all md/mdx files
   return function (_tree, file) {
-    const layout =
-      file.data.astro.frontmatter.layout ?? "./src/layouts/Layout.astro";
+    const layout = "./src/layouts/PublicNoteLayout.astro";
     file.data.astro.frontmatter.layout = layout;
   };
 }

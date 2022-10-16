@@ -6,6 +6,7 @@ tags:
   - obs
   - webcam
 link: https://github.com/joschuck/matrix-webcam
+title: Hacks
 ---
 
 https://github.com/joschuck/matrix-webcam

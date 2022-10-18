@@ -1,9 +1,9 @@
 ---
-let posts = await Astro.glob("../../pages/public-notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
+let posts = await Astro.glob("../../pages/notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
 posts = posts.filter((post) => !post.file.includes("README.md"));
 
 export async function getStaticPaths() {
-  let posts = await Astro.glob("../../pages/public-notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
+  let posts = await Astro.glob("../../pages/notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
   const tags = posts
     .map((p) => p.frontmatter.tags)
     .filter((tag) => tag)

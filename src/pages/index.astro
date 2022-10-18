@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout.astro";
 
 import PublicNoteLink from "../components/PublicNoteLink.astro";
 
-let posts = await Astro.glob("../pages/public-notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
+let posts = await Astro.glob("../pages/notes/**/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
 posts = posts
   .filter((post) => !post.file.includes("README.md"))
   .map((post) => {
@@ -18,8 +18,8 @@ posts = posts
     a.frontmatter == b.frontmatter.received
       ? 0
       : a.frontmatter > b.frontmatter.received
-      ? 1
-      : -1
+      ? -1
+      : 1
   );
 
 const tags = posts
